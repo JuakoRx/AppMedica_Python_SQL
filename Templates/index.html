@@ -1,98 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>Aplicacion Medica</title>
-    <style>
-    table, th, td {
-      border:1px solid black;
-      border-collapse: collapse;
-      
-    }
-    th,td{
-      text-align: left;
-      padding: 20px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación Médica</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body style="font-family: 'Times New Roman';">
 
-    <!-- Contenedor Principal -->
-    <div style="display: flex; min-height: 100vh;">
-        
-        <!-- Barra lateral: Formulario de Registro -->
-        <form action="/registrar" method="post" style="width: 300px; background-color: rgb(101, 230, 131); padding: 25px; display: flex; flex-direction: column; gap: 20px;">
+<body>
+
+    <div class="contenedor-principal">
+
+        <!-- Barra lateral -->
+        <div class="barra-lateral">
             <h1>Opciones</h1>
-
-            <!-- Botón de Registro FALTAN VALIDACIONES-->
-            <button type="submit" name="pagina_insertar" value="pagina_insertar" style="width: 100%; padding: 10px; font-weight: bold; border-radius: 4px; border: 1px solid #333; background-color: white; cursor: pointer; margin-top: 10px;">
-                Insertar Datos >>
-            </button>
-            <button type="submit" name="pagina_insertar" value="pagina_insertar" style="width: 100%; padding: 10px; font-weight: bold; border-radius: 4px; border: 1px solid #333; background-color: white; cursor: pointer; margin-top: 10px;">
-                Modificar Datos >>
-            </button>
-
-        </form>
-        <!-- COLUMNA DERECHA: Buscador y Tabla -->
-        <div style="flex: 1; padding: 25px; background-color: #fcfcfc;">
-            <h1 style="margin-top: 0;">Lista de Libros</h1>
-            <hr style="border: 0; border-top: 1px solid #ccc; margin-bottom: 30px;">
-
-            <!-- Formulario de Búsqueda NO FUNCIONANDO AUN-->
-            <form action="/Buscador" method="post" style="display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto;">
-                
-                <!-- BARRA DE BUSQUEDA -->
-                <div style="display: flex; width: 100%;">
-                    <input type="search" id="barra_busqueda" name="Buscar libro" placeholder="Buscar libro..." style="flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px 0 0 4px;" required>
-                    <button type="submit" style="padding: 8px 16px; border: 1px solid #ccc; border-left: none; border-radius: 0 4px 4px 0; background-color: #eee; cursor: pointer; font-weight: bold;">></button>
-                </div>
-              
-                <!-- FILTROS -->
-                <div style="display: flex; align-items: center; justify-content: center; gap: 20px; background: #f0f0f0; padding: 10px; border-radius: 4px;">
-                    <p style="margin: 0; font-weight: bold;">Filtrar por:</p>
-                    
-                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                        <input type="radio" id="filtro_titulo" name="tipo_filtro" checked> Título
-                    </label>
-
-                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                        <input type="radio" id="filtro_categoria" name="tipo_filtro"> Categoría
-                    </label>
-                </div>             
+            <hr>
+            <form action="/" method="get">
+                <button type="submit" class="btn-opcion">
+                    Inicio >>
+                </button>
             </form>
 
-            <!-- TABLA DE DATOS -->
-            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; padding-top: 25px">
-              <table style="width: 100%; align-items: center;">
-                <tr style="background-color: rgb(105, 223, 105);">
-                  <th>ID</th>
-                  <th>Título</th>
-                  <th>
-                    <div style="display: flex; align-items: center; justify-content: space-between;">Categoría
-                        <button type="button" style="margin: 0; width: 24px; display: inline-flex; align-items: center  ; justify-content: center;">⇅</button>
-                    </div>
-                  </th> 
-                </tr>
-                {% for libro in libros %}
-                    <tr>
-                        <td>{{ libro.idl }}</td>
-                        <td>{{ libro.titulo }}</td>
-                        <td>{{ libro.nombre }}</td>
-                    </tr>
-                {% endfor %}
-              </table>  
+            <form action="/insertarDatos" method="get">
+                <button type="submit" class="btn-opcion">
+                    Insertar Datos >>
+                </button>
+            </form>
+
+            <form action="/modificarDatos" method="get">
+                <button type="submit" class="btn-opcion">
+                    Modificar Datos >>
+                </button>
+            </form>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="contenedor-derecho">
+
+            <div class="encabezado-pagina">
+                <h1>Bienvenido a la Aplicación Médica</h1>
+                <p>Sistema de gestión de información médica.</p>
             </div>
 
-            <!-- SECCION CAMBIO DE PAGINA -->
-            <div style="display: flex; float: right; gap: 6px; align-items: center;margin-top: 10px;">
-                <!-- Eliminamos márgenes por defecto del párrafo -->
-                <p id="page" style="margin: 0;">
-                    <span style="display: inline-flex; align-items: center; justify-content: center; aspect-ratio: 1/1; width: 24px; border: 1px solid black;">1</span>
+            <hr class="separador">
+
+            <div class="tarjeta-formulario">
+                <h2 class="subtitulo-form">Panel principal</h2>
+
+                <p class="descripcion-form">
+                    Desde esta aplicación podrás gestionar la información
+                    de pacientes, médicos y atenciones médicas.
                 </p>
-                <!-- Usamos un tamaño fijo para los botones -->
-                <button type="button" style="margin: 0; width: 24px; aspect-ratio: 1/1; display: inline-flex; align-items: center; justify-content: center;"><</button>
-                <button type="button" style="margin: 0; width: 24px; aspect-ratio: 1/1; display: inline-flex; align-items: center; justify-content: center;">></button>
+
+                <div class="grid-formulario">
+
+                    <div>
+                        <h3>Pacientes</h3>
+                        <p>Accede a la sección para ingresar información de pacientes.</p>
+                    </div>
+
+                    <div>
+                        <h3>Médicos</h3>
+                        <p>Accede a la sección para ingresar información de médicos.</p>
+                    </div>
+
+                    <div>
+                        <h3>Atenciones médicas</h3>
+                        <p>Gestiona la información relacionada con las atenciones médicas.</p>
+                    </div>
+
+                    <div>
+                        <h3>Administración</h3>
+                        <p>Consulta y modifica la información registrada en el sistema.</p>
+                    </div>
+
+                </div>
             </div>
+
+        </div>
+
     </div>
 
 </body>

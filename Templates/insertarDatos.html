@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Aplicación Médica - Ingreso de Datos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function mostrarFormulario() {
+            var seleccion = document.getElementById("tipo_ingreso").value;
+            document.getElementById("form_paciente").style.display = seleccion === "paciente" ? "block" : "none";
+            document.getElementById("form_medico").style.display = seleccion === "medico" ? "block" : "none";
+            document.getElementById("form_atencion").style.display = seleccion === "atencion" ? "block" : "none";
+        }
+    </script>
+</head>
+<body onload="mostrarFormulario()">
+    <div class="contenedor-principal">
+        
+        
+        <!-- BARRA LATERAL -->
+        <div class="barra-lateral">
+
+            <h1>Opciones</h1>
+            <hr>
+
+            <form action="/" method="get">
+                <button type="submit" class="btn-opcion">
+                    Inicio >>
+                </button>
+            </form>
+
+            <form action="/insertarDatos" method="get">
+                <button type="submit" class="btn-opcion">
+                    Insertar Datos >>
+                </button>
+            </form>
+
+            <form action="/modificarDatos" method="get">
+                <button type="submit" class="btn-opcion">
+                    Modificar Datos >>
+                </button>
+            </form>
+
+        </div>
+
+
+        <!-- Contenedor Derecho -->
+        
+    <!-- CONTENEDOR DERECHO -->
+        <div class="contenedor-derecho">
+
+            <div class="encabezado-pagina">
+                <h1>Ingreso de Datos</h1>
+                <p>Completa los siguientes campos para registrar información en el sistema.</p>
+            </div>
+
+            <hr class="separador">
+
+            <div class="tarjeta-formulario">
+
+                <!-- SELECTOR DE ENTIDAD -->
+                <div class="selector-entidad">
+                    <label for="tipo_ingreso">Seleccionar tipo de registro</label>
+                    <select id="tipo_ingreso" onchange="mostrarFormulario()" class="select-estilo">
+                        <option value="paciente">Nuevo Paciente</option>
+                        <option value="medico">Nuevo Médico</option>
+                        <option value="atencion">Nueva Atención</option>
+                    </select>
+                </div>
+
+                <hr class="separador-suave">
+
+                <!-- FORMULARIO PACIENTE -->
+                <form id="form_paciente" action="/guardar_paciente" method="post" style="display: none;">
+
+                    <h2 class="subtitulo-form">Datos del Paciente</h2>
+                    <p class="descripcion-form">Ingresa la información personal del paciente.</p>
+
+                    <div class="grid-formulario">
+
+                        <div class="coolinput">
+                            <label for="id_paciente" class="text">ID Paciente</label>
+                            <input type="text" id="id_paciente" name="id_paciente"
+                                placeholder="Ej: 4" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="rut" class="text">RUT</label>
+                            <input type="text" id="rut" name="rut"
+                                placeholder="Ej: 12.345.678-9" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="nombre_paciente" class="text">Nombre Completo</label>
+                            <input type="text" id="nombre_paciente" name="nombre"
+                                placeholder="Ej: Camila Pérez" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="tel_paciente" class="text">Teléfono</label>
+                            <input type="text" id="tel_paciente" name="telefono"
+                                placeholder="Ej: +56912345678" class="input" required>
+                        </div>
+
+                    </div>
+
+                    <div class="acciones-formulario">
+                        <button type="submit" class="btn-guardar">Guardar Paciente</button>
+                    </div>
+                </form>
+
+                <!-- FORMULARIO MEDICO -->
+                <form id="form_medico" action="/guardar_medico" method="post" style="display: none;">
+
+                    <h2 class="subtitulo-form">Datos del Médico</h2>
+                    <p class="descripcion-form">Ingresa los datos profesionales del médico.</p>
+
+                    <div class="grid-formulario">
+
+                        <div class="coolinput">
+                            <label for="id_medico" class="text">ID Médico</label>
+                            <input type="text" id="id_medico" name="id_medico"
+                                placeholder="Ej: 30" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="nombre_medico" class="text">Nombre Completo</label>
+                            <input type="text" id="nombre_medico" name="nombre"
+                                placeholder="Ej: Dr. Javier Muñoz" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="especialidad" class="text">Especialidad</label>
+                            <input type="text" id="especialidad" name="especialidad"
+                                placeholder="Ej: Cardiología" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="tel_medico" class="text">Teléfono</label>
+                            <input type="text" id="tel_medico" name="telefono"
+                                placeholder="Ej: +56987654321" class="input" required>
+                        </div>
+
+                    </div>
+
+                    <div class="acciones-formulario">
+                        <button type="submit" class="btn-guardar">Guardar Médico</button>
+                    </div>
+                </form>
+
+                <!-- FORMULARIO ATENCION -->
+                <form id="form_atencion" action="/guardar_atencion" method="post" style="display: none;">
+
+                    <h2 class="subtitulo-form">Datos de la Atención</h2>
+                    <p class="descripcion-form">Registra los detalles correspondientes a la atención médica.</p>
+
+                    <div class="grid-formulario">
+
+                        <div class="coolinput">
+                            <label for="id_atencion" class="text">ID Atención</label>
+                            <input type="number" id="id_atencion" name="id_atencion"
+                                placeholder="Ej: 103" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="costo" class="text">Costo ($)</label>
+                            <input type="number" id="costo" name="costo"
+                                placeholder="Ej: 45000" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="id_paciente_fk" class="text">ID Paciente</label>
+                            <input type="text" id="id_paciente_fk" name="id_paciente"
+                                placeholder="ID del paciente registrado" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="id_medico_fk" class="text">ID Médico</label>
+                            <input type="text" id="id_medico_fk" name="id_medico"
+                                placeholder="ID del médico tratante" class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="fecha_atencion" class="text">Fecha Atención</label>
+                            <input type="date" id="fecha_atencion" name="fecha_atencion"
+                                class="input" required>
+                        </div>
+
+                        <div class="coolinput">
+                            <label for="fecha_alta" class="text">Fecha Alta (Opcional)</label>
+                            <input type="date" id="fecha_alta" name="fecha_alta" class="input">
+                        </div>
+
+                        <div class="coolinput campo-completo">
+                            <label for="diagnostico" class="text">Diagnóstico</label>
+                            <input type="text" id="diagnostico" name="diagnostico"
+                                placeholder="Detalle del diagnóstico médico" class="input" required>
+                        </div>
+
+                    </div>
+
+                    <div class="acciones-formulario">
+                        <button type="submit" class="btn-guardar">Guardar Atención</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

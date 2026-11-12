@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Aplicación Médica - Ingreso de Datos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function mostrarFormulario() {
+            var seleccion = document.getElementById("tipo_ingreso").value;
+            document.getElementById("form_paciente").style.display = seleccion === "paciente" ? "block" : "none";
+            document.getElementById("form_medico").style.display = seleccion === "medico" ? "block" : "none";
+            document.getElementById("form_atencion").style.display = seleccion === "atencion" ? "block" : "none";
+        }
+    </script>
+</head>
+<body onload="mostrarFormulario()">
+    <div class="contenedor-principal">
+    
+        <!-- BARRA LATERAL -->
+        <div class="barra-lateral">
+
+            <h1>Opciones</h1>
+            <hr>
+
+            <form action="/" method="get">
+                <button type="submit" class="btn-opcion">
+                    Inicio >>
+                </button>
+            </form>
+
+            <form action="/insertarDatos" method="get">
+                <button type="submit" class="btn-opcion">
+                    Insertar Datos >>
+                </button>
+            </form>
+
+            <form action="/modificarDatos" method="get">
+                <button type="submit" class="btn-opcion">
+                    Modificar Datos >>
+                </button>
+            </form>
+
+        </div>
+
+
+        <!-- CONTENEDOR DERECHO -->
+        <div class="contenedor-derecho">
+
+            <!-- ENCABEZADO -->
+            <div class="encabezado-pagina">
+                <h1>Modificar Datos</h1>
+                <p>Busca y selecciona un registro para modificar su información.</p>
+            </div>
+
+            <hr class="separador">
+
+            <!-- TARJETA PRINCIPAL -->
+            <div class="tarjeta-formulario">
+
+                <!-- SELECTOR -->
+                <div class="selector-entidad">
+                    <label for="tipo_modificacion">Seleccionar tipo de registro</label>
+
+                    <select id="tipo_modificacion" name="tipo_modificacion" class="select-estilo">
+                        <option value="paciente">Pacientes</option>
+                        <option value="medico">Médicos</option>
+                        <option value="atencion">Atenciones</option>
+                    </select>
+                </div>
+
+                <hr class="separador-suave">
+
+                <!-- BUSCADOR -->
+                <h2 class="subtitulo-form">Buscar registros</h2>
+                <p class="descripcion-form">
+                    Ingresa el nombre o identificador del registro que deseas modificar.
+                </p>
+
+                <form action="/buscar_modificar" method="post">
+
+                    <div class="buscador-modificar">
+
+                        <input
+                            type="search"
+                            name="busqueda"
+                            class="input"
+                            placeholder="Buscar registro..."
+                            required
+                        >
+
+                        <button type="submit" class="btn-guardar">
+                            Buscar
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <hr class="separador-suave">
+
+                <!-- TABLA DE RESULTADOS -->
+                <h2 class="subtitulo-form">Registros encontrados</h2>
+
+                <div class="tabla-modificar">
+
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Información</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <!-- Aquí se mostrarán los registros desde Flask -->
+
+                            {% for registro in registros %}
+                            <tr>
+                                <td>{{ registro.id }}</td>
+                                <td>{{ registro.nombre }}</td>
+                                <td>{{ registro.informacion }}</td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        class="btn-modificar"
+                                        onclick="modificarRegistro('{{ registro.id }}')">
+                                        Modificar
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

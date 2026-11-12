@@ -1,0 +1,322 @@
+/* ==============================
+   ESTILOS GENERALES
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f9fc;
+    color: #333;
+}
+
+.contenedor-principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ==============================
+   BARRA LATERAL
+================================ */
+
+.barra-lateral {
+    width: 250px;
+    flex-shrink: 0;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+    background-color: #e5f3fa;
+    border-right: 1px solid #c8e1ef;
+}
+
+.barra-lateral h1 {
+    margin: 0;
+    padding: 0 5px 15px;
+    font-size: 23px;
+    color: #245875;
+}
+
+/* Línea divisoria */
+.barra-lateral hr {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #b8d6e6;
+    margin: 0 0 20px;
+}
+
+/* Separación entre opciones */
+.barra-lateral form {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.btn-opcion {
+    width: 100%;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    color: #315c75;
+    background-color: #ffffff;
+    border: 1px solid #c5dce9;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-opcion:hover {
+    background-color: #d1eaf7;
+    border-color: #83bad6;
+}
+
+/* ==============================
+   CONTENEDOR DERECHO
+================================ */
+
+.contenedor-derecho {
+    flex: 1;
+    min-width: 0;
+    padding: 25px 30px;
+    background-color: #f8fbfd;
+}
+
+/* Encabezado */
+.encabezado-pagina h1 {
+    margin: 0 0 5px;
+    font-size: 25px;
+    color: #245875;
+}
+
+.encabezado-pagina p {
+    margin: 0 0 12px;
+    color: #71838e;
+    font-size: 14px;
+}
+
+/* Separador principal */
+.separador {
+    border: none;
+    border-top: 1px solid #d6e5ed;
+    margin-bottom: 18px;
+}
+
+/* ==============================
+   TARJETAS Y FORMULARIOS
+================================ */
+
+.tarjeta-formulario {
+    width: 100%;
+    padding: 22px 25px;
+    background-color: #ffffff;
+    border: 1px solid #dce9ef;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(40, 90, 120, 0.05);
+}
+
+.subtitulo-form {
+    margin: 0 0 5px;
+    color: #3284a8;
+    font-size: 20px;
+}
+
+.descripcion-form {
+    margin-bottom: 20px;
+    color: #82919a;
+    font-size: 13px;
+}
+
+.separador-suave {
+    border: none;
+    border-top: 1px solid #e7eef2;
+    margin: 18px 0;
+}
+
+/* Selector */
+.selector-entidad {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 350px;
+}
+
+.selector-entidad label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.select-estilo {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbdce5;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 14px;
+}
+
+/* Distribución de campos */
+.grid-formulario {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px 22px;
+}
+
+.coolinput {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    width: 100%;
+}
+
+.coolinput .text {
+    font-size: 13px;
+    font-weight: bold;
+    color: #445965;
+}
+
+.coolinput .input {
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px solid #cbdce5;
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.coolinput .input:focus,
+.select-estilo:focus {
+    outline: none;
+    border-color: #65b5dc;
+    box-shadow: 0 0 0 2px rgba(101, 181, 220, 0.15);
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+/* Botón guardar */
+.acciones-formulario {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 22px;
+}
+
+.btn-guardar {
+    padding: 10px 22px;
+    background-color: #76c4e5;
+    border: 1px solid #5aafd4;
+    border-radius: 5px;
+    color: #173f55;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-guardar:hover {
+    background-color: #5eb2d8;
+}
+
+/* ==============================
+   MODIFICAR DATOS
+================================ */
+
+.buscador-modificar {
+    display: flex;
+    gap: 10px;
+    max-width: 650px;
+}
+
+.buscador-modificar .input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 11px;
+    border: 1px solid #cbdce5;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.tabla-modificar {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 18px;
+}
+
+.tabla-modificar .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-modificar .table th,
+.tabla-modificar .table td {
+    padding: 11px 13px;
+    border: 1px solid #dce6ec;
+    text-align: left;
+    font-size: 13px;
+}
+
+.tabla-modificar .table thead {
+    background-color: #dceff8;
+    color: #315c75;
+}
+
+.btn-modificar {
+    padding: 7px 12px;
+    background-color: #76c4e5;
+    border: 1px solid #5aafd4;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-modificar:hover {
+    background-color: #5eb2d8;
+}
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+    .contenedor-principal {
+        flex-direction: column;
+    }
+
+    .barra-lateral {
+        width: 100%;
+        padding: 15px;
+        border-right: none;
+        border-bottom: 1px solid #c8e1ef;
+    }
+
+    .contenedor-derecho {
+        padding: 18px;
+    }
+
+    .grid-formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-completo {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .buscador-modificar {
+        flex-direction: column;
+    }
+
+    .buscador-modificar button {
+        width: 100%;
+    }
+
+    .tarjeta-formulario {
+        padding: 17px;
+    }
+}

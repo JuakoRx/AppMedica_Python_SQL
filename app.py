@@ -1,29 +1,31 @@
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2
+from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
-def connectar_bd():
+def conectar_bd():
     return psycopg2.connect(
-        host = "localhost",
-        port = "5432",
-        user = "postgres",
-        password = "Joaquin8",
-        database = "App_Medica",
+        host="localhost",
+        port="5432",
+        user="postgres",
+        password="Joaquin8",
+        database="App_Medica",
     )
 
-
-@app.route("/")
+@app.route('/')
 def inicio():
-    conexion = connectar_bd()
-    cursor = conexion.cursor()
+    return render_template('index.html')
 
-    cursor.execute("Select * FROM medico")
 
-    medicos = cursor.fetchall()
-    for medico in medicos:
-        print (medico)
-    return render_template("index.html",medico = medicos)
+@app.route('/insertarDatos')
+def insertarDatos():
+    return render_template('insertarDatos.html')
+
+
+@app.route('/modificarDatos')
+def modificarDatos():
+    return render_template('modificarDatos.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
